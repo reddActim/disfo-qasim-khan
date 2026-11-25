@@ -3,23 +3,20 @@ const User = require('../models/user.model');
 const registerUser = async (req, res) => {
     try {
         const { fullName, username, email } = req.body;
-
         // Check if user with same username or email already exists
         const existingUser = await User.findOne({
             $or: [{ username }, { email }]
         });
-
         if (existingUser) {
             return res.status(409).json({
                 message: "Failed to create new user",
                 reason: "Already Exists in DB"
             });
         }
-
         const newUser = new User({
             fullName: fullName,
-            username,
-            email
+            username: username,
+            email: email
         });
 
         const savedUser = await newUser.save();

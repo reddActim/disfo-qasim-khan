@@ -11,6 +11,5 @@ const validateUser = (data) => {
 };
 
 module.exports = {
-    userValidationSchema,
     validateUser
 };
